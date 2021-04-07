@@ -11,8 +11,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val v = findViewById<StrokedTextView>(R.id.stroked_text_view)
-        v.text = "abcdef我人有的和"
+        v.text = "ab克己复礼可升级老骥伏枥文件垃圾分类看cdef我人有的和"
         v.textSize = 100f
-        v.strokeTextColor = Color.CYAN
+        v.solidTextColor = Color.WHITE
+        v.strokeTextColor = Color.BLACK
     }
 }
