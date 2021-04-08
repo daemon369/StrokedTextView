@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StrokedTextView">
+        <attr name="android:text" format="string|reference" />
+        <attr name="android:textSize" format="dimension" />
+        <attr name="daemon_solid_text_color" format="color" />
+        <attr name="daemon_stroke_text_color" format="color" />
+        <attr name="daemon_stroke_width" format="dimension" />
+        <attr name="android:gravity" />
+    </declare-styleable>
+</resources>

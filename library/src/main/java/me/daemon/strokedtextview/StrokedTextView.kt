@@ -61,6 +61,21 @@ class StrokedTextView @JvmOverloads constructor(
 
     private lateinit var layout: StaticLayout
 
+    init {
+        attrs?.apply {
+            val t = context.obtainStyledAttributes(this, R.styleable.StrokedTextView, defStyleAttr, 0)
+            try {
+                text = t.getString(R.styleable.StrokedTextView_android_text) ?: ""
+                textSize = t.getDimension(R.styleable.StrokedTextView_android_textSize, 0f)
+                solidTextColor = t.getColor(R.styleable.StrokedTextView_daemon_solid_text_color, Color.BLACK)
+                strokeTextColor = t.getColor(R.styleable.StrokedTextView_daemon_stroke_text_color, Color.WHITE)
+                strokeWidth = t.getDimension(R.styleable.StrokedTextView_daemon_stroke_width, paint.strokeWidth)
+            } finally {
+                t.recycle()
+            }
+        }
+    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val wMode = MeasureSpec.getMode(widthMeasureSpec)
         val wSize = MeasureSpec.getSize(widthMeasureSpec)
