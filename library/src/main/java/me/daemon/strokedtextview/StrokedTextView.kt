@@ -101,11 +101,6 @@ class StrokedTextView @JvmOverloads constructor(
             min(Layout.getDesiredWidth(text, paint).toInt(), wSize)
         }
 
-
-        val layoutDirection = layoutDirection
-        val absoluteGravity = Gravity.getAbsoluteGravity(gravity, layoutDirection)
-        val verticalGravity = gravity and Gravity.VERTICAL_GRAVITY_MASK
-
         initLayout(w)
 
         val h = if (hMode == MeasureSpec.EXACTLY) {
@@ -119,6 +114,18 @@ class StrokedTextView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
+        canvas.save()
+
+        val textH = layout.height
+
+        val top = when (gravity and Gravity.VERTICAL_GRAVITY_MASK) {
+            Gravity.CENTER_VERTICAL -> (measuredHeight - textH) / 2f
+            Gravity.BOTTOM -> (measuredHeight - textH).toFloat()
+            else -> 0f
+        }
+
+        canvas.translate(0f, top)
+
         paint.style = Paint.Style.STROKE
         paint.color = strokeTextColor
         layout.draw(canvas)
@@ -126,13 +133,14 @@ class StrokedTextView @JvmOverloads constructor(
         paint.style = Paint.Style.FILL
         paint.color = solidTextColor
         layout.draw(canvas)
+
+
+        canvas.restore()
     }
 
     private fun initLayout(w: Int) {
         val layoutDirection = layoutDirection
         val absoluteGravity = Gravity.getAbsoluteGravity(gravity, layoutDirection)
-//        val verticalGravity = gravity and Gravity.VERTICAL_GRAVITY_MASK
-
 
         val alignment = when (absoluteGravity and Gravity.HORIZONTAL_GRAVITY_MASK) {
             Gravity.CENTER_HORIZONTAL -> Layout.Alignment.ALIGN_CENTER
