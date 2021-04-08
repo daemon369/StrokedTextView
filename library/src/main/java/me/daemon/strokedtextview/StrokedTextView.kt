@@ -25,9 +25,9 @@ class StrokedTextView @JvmOverloads constructor(
         }
 
     var textSize: Float
-        get() = solidPaint.textSize
+        get() = paint.textSize
         set(value) {
-            solidPaint.textSize = value
+            paint.textSize = value
         }
 
     var solidTextColor: Int = Color.BLACK
@@ -45,13 +45,13 @@ class StrokedTextView @JvmOverloads constructor(
         }
 
     var strokeWidth: Float
-        get() = solidPaint.strokeWidth
+        get() = paint.strokeWidth
         set(value) {
-            solidPaint.strokeWidth = value
+            paint.strokeWidth = value
             invalidate()
         }
 
-    private val solidPaint = TextPaint().apply {
+    private val paint = TextPaint().apply {
         isAntiAlias = true
         isDither = true
         color = Color.BLACK
@@ -59,7 +59,7 @@ class StrokedTextView @JvmOverloads constructor(
         strokeWidth = 10f
     }
 
-    private lateinit var solidLayout: StaticLayout
+    private lateinit var layout: StaticLayout
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val wMode = MeasureSpec.getMode(widthMeasureSpec)
@@ -70,7 +70,7 @@ class StrokedTextView @JvmOverloads constructor(
         val w = if (wMode == MeasureSpec.EXACTLY) {
             wSize
         } else {
-            min(Layout.getDesiredWidth(text, solidPaint).toInt(), wSize)
+            min(Layout.getDesiredWidth(text, paint).toInt(), wSize)
         }
 
         initLayout(w)
@@ -78,7 +78,7 @@ class StrokedTextView @JvmOverloads constructor(
         val h = if (hMode == MeasureSpec.EXACTLY) {
             hSize
         } else {
-            min(solidLayout.height, hSize)
+            min(layout.height, hSize)
         }
 
         setMeasuredDimension(w, h)
@@ -86,24 +86,24 @@ class StrokedTextView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        solidPaint.style = Paint.Style.STROKE
-        solidPaint.color = strokeTextColor
-        solidLayout.draw(canvas)
+        paint.style = Paint.Style.STROKE
+        paint.color = strokeTextColor
+        layout.draw(canvas)
 
-        solidPaint.style = Paint.Style.FILL
-        solidPaint.color = solidTextColor
-        solidLayout.draw(canvas)
+        paint.style = Paint.Style.FILL
+        paint.color = solidTextColor
+        layout.draw(canvas)
     }
 
     private fun initLayout(w: Int) {
-        solidLayout =
+        layout =
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                     StaticLayout.Builder
                             .obtain(
                                     text,
                                     0,
                                     text.length,
-                                    solidPaint,
+                                    paint,
                                     w
                             )
                             .setAlignment(Layout.Alignment.ALIGN_CENTER)
@@ -116,7 +116,7 @@ class StrokedTextView @JvmOverloads constructor(
                     @Suppress("DEPRECATION")
                     StaticLayout(
                             text,
-                            solidPaint,
+                            paint,
                             w,
                             Layout.Alignment.ALIGN_CENTER,
                             1f,
