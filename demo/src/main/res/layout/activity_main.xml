@@ -10,10 +10,10 @@
         android:id="@+id/stroked_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="福建阿胶离开就离开离开faflew家flaw了几分里发霉了么饭啦没离开v老妈老妈额外"
-        android:textSize="20sp"
         app:daemon_solid_text_color="#ff0000"
         app:daemon_stroke_text_color="@color/teal_200"
-        app:daemon_stroke_width="2dp" />
+        app:daemon_stroke_width="2dp"
+        app:daemon_text="福建阿胶离开就离开离开faflew家flaw了几分里发霉了么饭啦没离开v老妈老妈额外"
+        app:daemon_text_size="20sp" />
 
 </RelativeLayout>
