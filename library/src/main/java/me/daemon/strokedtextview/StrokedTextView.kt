@@ -9,6 +9,7 @@ import android.text.StaticLayout
 import android.text.TextDirectionHeuristics
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import kotlin.math.min
 
@@ -27,7 +28,10 @@ class StrokedTextView @JvmOverloads constructor(
     var textSize: Float
         get() = paint.textSize
         set(value) {
+            if (paint.textSize == value) return
             paint.textSize = value
+            requestLayout()
+            invalidate()
         }
 
     var solidTextColor: Int = Color.BLACK
@@ -47,7 +51,15 @@ class StrokedTextView @JvmOverloads constructor(
     var strokeWidth: Float
         get() = paint.strokeWidth
         set(value) {
+            if (paint.strokeWidth == value) return
             paint.strokeWidth = value
+            invalidate()
+        }
+
+    var gravity: Int = Gravity.START or Gravity.TOP
+        set(value) {
+            if (field == value) return
+            field = value
             invalidate()
         }
 
@@ -70,6 +82,7 @@ class StrokedTextView @JvmOverloads constructor(
                 solidTextColor = t.getColor(R.styleable.StrokedTextView_daemon_solid_text_color, Color.BLACK)
                 strokeTextColor = t.getColor(R.styleable.StrokedTextView_daemon_stroke_text_color, Color.WHITE)
                 strokeWidth = t.getDimension(R.styleable.StrokedTextView_daemon_stroke_width, paint.strokeWidth)
+                gravity = t.getInteger(R.styleable.StrokedTextView_daemon_gravity, Gravity.START or Gravity.TOP)
             } finally {
                 t.recycle()
             }
@@ -87,6 +100,11 @@ class StrokedTextView @JvmOverloads constructor(
         } else {
             min(Layout.getDesiredWidth(text, paint).toInt(), wSize)
         }
+
+
+        val layoutDirection = layoutDirection
+        val absoluteGravity = Gravity.getAbsoluteGravity(gravity, layoutDirection)
+        val verticalGravity = gravity and Gravity.VERTICAL_GRAVITY_MASK
 
         initLayout(w)
 
@@ -111,34 +129,46 @@ class StrokedTextView @JvmOverloads constructor(
     }
 
     private fun initLayout(w: Int) {
-        layout =
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    StaticLayout.Builder
-                            .obtain(
-                                    text,
-                                    0,
-                                    text.length,
-                                    paint,
-                                    w
-                            )
-                            .setAlignment(Layout.Alignment.ALIGN_CENTER)
-                            .setTextDirection(TextDirectionHeuristics.LTR)
-                            .setLineSpacing(0f, 1f)
+        val layoutDirection = layoutDirection
+        val absoluteGravity = Gravity.getAbsoluteGravity(gravity, layoutDirection)
+//        val verticalGravity = gravity and Gravity.VERTICAL_GRAVITY_MASK
+
+
+        val alignment = when (absoluteGravity and Gravity.HORIZONTAL_GRAVITY_MASK) {
+            Gravity.CENTER_HORIZONTAL -> Layout.Alignment.ALIGN_CENTER
+            Gravity.RIGHT -> {
+                Layout.Alignment.ALIGN_OPPOSITE
+            }
+            else -> Layout.Alignment.ALIGN_NORMAL
+        }
+
+        layout = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            StaticLayout.Builder
+                    .obtain(
+                            text,
+                            0,
+                            text.length,
+                            paint,
+                            w
+                    )
+                    .setAlignment(alignment)
+                    .setTextDirection(TextDirectionHeuristics.LTR)
+                    .setLineSpacing(0f, 1f)
 //                    .setBreakStrategy(breakStrategy)
 //                    .setJustificationMode(justificationMode)
-                            .build()
-                } else {
-                    @Suppress("DEPRECATION")
-                    StaticLayout(
-                            text,
-                            paint,
-                            w,
-                            Layout.Alignment.ALIGN_CENTER,
-                            1f,
-                            0f,
-                            true
-                    )
-                }
+                    .build()
+        } else {
+            @Suppress("DEPRECATION")
+            StaticLayout(
+                    text,
+                    paint,
+                    w,
+                    alignment,
+                    1f,
+                    0f,
+                    true
+            )
+        }
     }
 
 }

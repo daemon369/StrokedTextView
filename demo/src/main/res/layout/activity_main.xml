@@ -10,6 +10,7 @@
         android:id="@+id/stroked_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:daemon_gravity="right"
         app:daemon_solid_text_color="#ff0000"
         app:daemon_stroke_text_color="@color/teal_200"
         app:daemon_stroke_width="2dp"
