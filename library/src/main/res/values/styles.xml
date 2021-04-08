@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="StrokedTextView">
+        <!-- 文本 -->
         <attr name="daemon_text" format="string|reference" />
+        <!-- 字体大小 -->
         <attr name="daemon_text_size" format="dimension" />
+        <!-- 填充色 -->
         <attr name="daemon_solid_text_color" format="color" />
+        <!-- 描边色 -->
         <attr name="daemon_stroke_text_color" format="color" />
+        <!-- 描边宽度 -->
         <attr name="daemon_stroke_width" format="dimension" />
 
+        <!-- 文本重心 -->
         <attr name="daemon_gravity">
             <flag name="top" value="0x30" />
             <flag name="bottom" value="0x50" />
