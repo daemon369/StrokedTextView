@@ -1,5 +1,6 @@
 package me.daemon.strokedtextview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -114,6 +115,8 @@ class StrokedTextView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
+        if (text.isEmpty()) return
+
         canvas.save()
 
         val textH = layout.height
@@ -142,6 +145,7 @@ class StrokedTextView @JvmOverloads constructor(
         val layoutDirection = layoutDirection
         val absoluteGravity = Gravity.getAbsoluteGravity(gravity, layoutDirection)
 
+        @SuppressLint("RtlHardcoded")
         val alignment = when (absoluteGravity and Gravity.HORIZONTAL_GRAVITY_MASK) {
             Gravity.CENTER_HORIZONTAL -> Layout.Alignment.ALIGN_CENTER
             Gravity.RIGHT -> {

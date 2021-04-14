@@ -1,2 +1,4 @@
+rootProject.name = "StrokedTextView"
+
 include ':library'
 include ':demo'
