@@ -1,7 +1,19 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'com.jfrog.bintray' version '1.8.5'
 }
 
 apply from: "${rootDir}/gradle/library_base.gradle"
+
+apply from: "${rootDir}/gradle/maven-publish.gradle"
+
+
+android {
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "io.github.daemon369.stroked_text_view"]
+    }
+
+    buildFeatures {
+        buildConfig = false
+    }
+}
