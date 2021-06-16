@@ -14,6 +14,8 @@ dependencies {
 }
 ```
 
+可以在<https://mvnrepository.com/artifact/io.github.daemon369/stroked-text-view>查询最新版本
+
 ## 使用
 
 ### 代码方式
