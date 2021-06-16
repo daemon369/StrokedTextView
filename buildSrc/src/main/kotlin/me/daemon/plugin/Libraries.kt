@@ -41,7 +41,7 @@ object Libraries {
         const val lifecycleJava8 = "androidx.lifecycle:lifecycle-common-java8:${v.lifecycle}"
         const val activity = "androidx.activity:activity:${v.activity}"
         const val fragment = "androidx.fragment:fragment:${v.fragment}"
-        const val fragmentktx = "androidx.fragment:androidx.fragment:fragment-ktx:${v.fragment}"
+        const val fragmentKtx = "androidx.fragment:androidx.fragment:fragment-ktx:${v.fragment}"
         const val constraint = "androidx.constraintlayout:constraintlayout:${v.constraintLayout}"
     }
 
