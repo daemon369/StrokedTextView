@@ -64,7 +64,7 @@ afterEvaluate {
                 pom {
                     name = Configuration.artifactId
                     description = 'Android custom view for drawing stroked text'
-                    url = 'https://github.com/daemon369/StrokedTextView'
+                    url = 'https://github.com/daemon369/stroked-text-view'
                     licenses {
                         license {
                             name = 'The Apache Software License, Version 2.0'
@@ -79,9 +79,9 @@ afterEvaluate {
                         }
                     }
                     scm {
-                        connection = 'scm:git:github.com/daemon369/StrokedTextView.git'
-                        developerConnection = 'scm:git:ssh://github.com/daemon369/StrokedTextView.git'
-                        url = 'https://github.com/daemon369/StrokedTextView/tree/main'
+                        connection = 'scm:git:github.com/daemon369/stroked-text-view.git'
+                        developerConnection = 'scm:git:ssh://github.com/daemon369/stroked-text-view.git'
+                        url = 'https://github.com/daemon369/stroked-text-view/tree/main'
                     }
                 }
             }
