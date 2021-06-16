@@ -3,14 +3,15 @@ plugins {
     id 'kotlin-android'
 }
 
-apply from: "${rootDir}/gradle/library_base.gradle"
+import me.daemon.plugin.Configuration
 
+apply from: "${rootDir}/gradle/library_base.gradle"
 apply from: "${rootDir}/gradle/maven-publish.gradle"
 
 
 android {
     compileOptions {
-        kotlinOptions.freeCompilerArgs += ['-module-name', "io.github.daemon369.stroked_text_view"]
+        kotlinOptions.freeCompilerArgs += ['-module-name', "${Configuration.groupId}.${Configuration.artifactId}"]
     }
 
     buildFeatures {
