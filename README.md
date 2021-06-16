@@ -1,5 +1,19 @@
 # StrokedTextView
 
+## 添加依赖
+
+`build.gradle`文件中添加：
+
+```groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "io.github.daemon369:stroked-text-view:0.1.0"
+}
+```
+
 ## 使用
 
 ### 代码方式
