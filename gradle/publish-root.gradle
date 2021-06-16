@@ -22,8 +22,6 @@ if (secretPropsFile.exists()) {
 //            stagingProfileId = sonatypeStagingProfileId
 ////            username = ossrhUsername
 ////            password = ossrhPassword
-***REMOVED***
-***REMOVED***
 //        }
 //    }
 //}
