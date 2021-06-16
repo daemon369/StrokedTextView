@@ -3,13 +3,17 @@
  */
 apply plugin: 'kotlin-android'
 
+
+import me.daemon.plugin.Configuration
+import me.daemon.plugin.Libraries
+
 android {
-    compileSdkVersion compile_sdk_version
-    buildToolsVersion build_tools_version
+    compileSdkVersion Configuration.compileSdkVersion
+    buildToolsVersion Configuration.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion min_sdk_version
-        targetSdkVersion target_sdk_version
+        minSdkVersion Configuration.minSdkVersion
+        targetSdkVersion Configuration.targetSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,10 +30,10 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
-    implementation dep.kotlin
+    implementation Libraries.K.std
 
-    testImplementation dep.junit
-    androidTestImplementation dep.x.junit
-    androidTestImplementation dep.x.espressocore
+    testImplementation Libraries.T.junit
+    androidTestImplementation Libraries.T.xJunit
+    androidTestImplementation Libraries.T.espresso
 
 }
