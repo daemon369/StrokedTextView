@@ -49,6 +49,13 @@ class StrokedTextView @JvmOverloads constructor(
             invalidate()
         }
 
+    var showStroke = true
+        set(value) {
+            if (field == value) return
+            field = value
+            invalidate()
+        }
+
     var strokeWidth: Float
         get() = paint.strokeWidth
         set(value) {
@@ -76,14 +83,24 @@ class StrokedTextView @JvmOverloads constructor(
 
     init {
         attrs?.apply {
-            val t = context.obtainStyledAttributes(this, R.styleable.StrokedTextView, defStyleAttr, 0)
+            val t =
+                context.obtainStyledAttributes(this, R.styleable.StrokedTextView, defStyleAttr, 0)
             try {
                 text = t.getString(R.styleable.StrokedTextView_daemon_text) ?: ""
                 textSize = t.getDimension(R.styleable.StrokedTextView_daemon_text_size, 0f)
-                solidTextColor = t.getColor(R.styleable.StrokedTextView_daemon_solid_text_color, Color.BLACK)
-                strokeTextColor = t.getColor(R.styleable.StrokedTextView_daemon_stroke_text_color, Color.WHITE)
-                strokeWidth = t.getDimension(R.styleable.StrokedTextView_daemon_stroke_width, paint.strokeWidth)
-                gravity = t.getInteger(R.styleable.StrokedTextView_daemon_gravity, Gravity.START or Gravity.TOP)
+                solidTextColor =
+                    t.getColor(R.styleable.StrokedTextView_daemon_solid_text_color, Color.BLACK)
+                showStroke = t.getBoolean(R.styleable.StrokedTextView_daemon_show_stroke, true)
+                strokeTextColor =
+                    t.getColor(R.styleable.StrokedTextView_daemon_stroke_text_color, Color.WHITE)
+                strokeWidth = t.getDimension(
+                    R.styleable.StrokedTextView_daemon_stroke_width,
+                    paint.strokeWidth
+                )
+                gravity = t.getInteger(
+                    R.styleable.StrokedTextView_daemon_gravity,
+                    Gravity.START or Gravity.TOP
+                )
             } finally {
                 t.recycle()
             }
@@ -129,9 +146,11 @@ class StrokedTextView @JvmOverloads constructor(
 
         canvas.translate(0f, top)
 
-        paint.style = Paint.Style.STROKE
-        paint.color = strokeTextColor
-        layout.draw(canvas)
+        if (showStroke) {
+            paint.style = Paint.Style.STROKE
+            paint.color = strokeTextColor
+            layout.draw(canvas)
+        }
 
         paint.style = Paint.Style.FILL
         paint.color = solidTextColor

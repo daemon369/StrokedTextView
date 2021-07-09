@@ -1,6 +1,5 @@
 package me.daemon.strokedtextview.demo
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import me.daemon.strokedtextview.StrokedTextView
@@ -16,5 +15,8 @@ class MainActivity : AppCompatActivity() {
 //        v.solidTextColor = Color.RED
 //        v.strokeTextColor = Color.GREEN
 //        v.strokeWidth = 5f
+        v.setOnClickListener {
+            v.showStroke = v.showStroke.not()
+        }
     }
 }
