@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation "io.github.daemon369:stroked-text-view:0.1.0"
+    implementation "io.github.daemon369:stroked-text-view:0.2.0"
 }
 ```
 
@@ -28,6 +28,7 @@ v.solidTextColor = Color.RED
 v.strokeTextColor = Color.GREEN
 v.strokeWidth = 5f
 v.gravity = Gravity.TOP or Gravity.END
+v.showStroke = true
 ```
 
 ### xml方式
@@ -38,6 +39,7 @@ v.gravity = Gravity.TOP or Gravity.END
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:daemon_gravity="end|bottom"
+    app:daemon_show_stroke="false"
     app:daemon_solid_text_color="#ff0000"
     app:daemon_stroke_text_color="@color/teal_200"
     app:daemon_stroke_width="2dp"
@@ -55,6 +57,8 @@ v.gravity = Gravity.TOP or Gravity.END
     <attr name="daemon_text_size" format="dimension" />
     <!-- 填充色 -->
     <attr name="daemon_solid_text_color" format="color" />
+        <!-- 是否显示描边 -->
+        <attr name="daemon_show_stroke" format="boolean" />
     <!-- 描边色 -->
     <attr name="daemon_stroke_text_color" format="color" />
     <!-- 描边宽度 -->
