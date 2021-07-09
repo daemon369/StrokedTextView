@@ -7,7 +7,7 @@ object Libraries {
      */
     @Suppress("ClassName")
     private object v {
-        const val kotlin = "1.5.20"
+        const val kotlin = "1.4.32"
         const val coroutines = "1.4.2"
 
         const val core = "1.5.0"
